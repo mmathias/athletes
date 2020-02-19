@@ -29,7 +29,7 @@ public class TowerTest {
     }
 
     @Test
-    public void itShouldReturn1IfThereAreThreeEqualAthletes() {
+    public void itShouldReturn2IfThereAreThreeEqualAthletes() {
         List<Athlete> athletes = new ArrayList<>();
         athletes.add(new Athlete(2, 2));
         athletes.add(new Athlete(2, 2));
@@ -41,7 +41,7 @@ public class TowerTest {
     }
 
     @Test
-    public void itShouldReturn1IfThereAreTwoEqualAthletes() {
+    public void itShouldReturn1IfThereAreTwoWeakAthletes() {
         List<Athlete> athletes = new ArrayList<>();
         athletes.add(new Athlete(4, 1));
         athletes.add(new Athlete(2, 2));

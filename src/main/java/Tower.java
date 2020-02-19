@@ -11,28 +11,34 @@ public class Tower {
     public Integer getMaxAthletesInPyramid() {
         athletes.sort(Comparator.comparing(Athlete::getMass).reversed());
 
-        return getMatrixSumOfLighterAthletesMasses();
+        return calculateMaxAthletes();
     }
 
-    private Integer getMatrixSumOfLighterAthletesMasses() {
+    private Integer calculateMaxAthletes() {
         int sumOfLighterAthletes = 0;
-        int temporarySumOfLighterAthletes;
+        int sum;
         int maxAthletes = 1;
-        int temporaryMaxAthletes = 1;
+        int max = 1;
 
         for (int i = 0; i < athletes.size() - 1; i++) {
             for (int j = i + 1; j < athletes.size(); j++) {
-                temporarySumOfLighterAthletes = sumOfLighterAthletes + athletes.get(j).getMass();
-                if (temporarySumOfLighterAthletes <= athletes.get(i).getStrength()) {
-                    sumOfLighterAthletes = temporarySumOfLighterAthletes;
+                sum = sumOfLighterAthletes + athletes.get(j).getMass();
+                if (sum <= athletes.get(i).getStrength()) {
+                    sumOfLighterAthletes = sum;
 
-                    if (maxAthletes < ++temporaryMaxAthletes) {
-                        maxAthletes = temporaryMaxAthletes;
-                    }
+                    maxAthletes = updateMaxAthletes(maxAthletes, ++max);
                 }
             }
-            temporaryMaxAthletes = 0;
+            max = 0;
             sumOfLighterAthletes = 0;
+        }
+
+        return maxAthletes;
+    }
+
+    private int updateMaxAthletes(int maxAthletes, int max) {
+        if (maxAthletes < max) {
+            return max;
         }
 
         return maxAthletes;

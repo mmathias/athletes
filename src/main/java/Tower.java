@@ -9,9 +9,13 @@ public class Tower {
     }
 
     public Integer getMaxAthletesInPyramid() {
-        athletes.sort(Comparator.comparing(Athlete::getMass).reversed());
+        orderAthletesByMass();
 
         return calculateMaxAthletes();
+    }
+
+    private void orderAthletesByMass() {
+        athletes.sort(Comparator.comparing(Athlete::getMass).reversed());
     }
 
     private Integer calculateMaxAthletes() {
@@ -27,9 +31,11 @@ public class Tower {
                     sumOfLighterAthletes = sum;
 
                     maxAthletes = updateMaxAthletes(maxAthletes, ++max);
+                } else {
+                    break;
                 }
             }
-            max = 0;
+            max = 1;
             sumOfLighterAthletes = 0;
         }
 
@@ -37,10 +43,6 @@ public class Tower {
     }
 
     private int updateMaxAthletes(int maxAthletes, int max) {
-        if (maxAthletes < max) {
-            return max;
-        }
-
-        return maxAthletes;
+        return Math.max(maxAthletes, max);
     }
 }

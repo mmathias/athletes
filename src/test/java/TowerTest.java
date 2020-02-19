@@ -89,4 +89,17 @@ public class TowerTest {
         Integer maxAthletesInPyramid = tower.getMaxAthletesInPyramid();
         assertEquals(Integer.valueOf(1), maxAthletesInPyramid);
     }
+
+    @Test
+    public void itShouldReturn3WhenTheHeaviestIsNotTheStrongestButTheSecondHeaviestIs() {
+        List<Athlete> athletes = new ArrayList<>();
+        athletes.add(new Athlete(5, 1));
+        athletes.add(new Athlete(6, 2));
+        athletes.add(new Athlete(7, 20));
+        athletes.add(new Athlete(8, 6));
+        Tower tower = new Tower(athletes);
+
+        Integer maxAthletesInPyramid = tower.getMaxAthletesInPyramid();
+        assertEquals(Integer.valueOf(3), maxAthletesInPyramid);
+    }
 }

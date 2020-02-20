@@ -1,4 +1,6 @@
-public class Athlete {
+import java.util.List;
+
+public class Athlete implements Comparable<Athlete> {
 
     private Integer mass;
     private Integer strength;
@@ -8,27 +10,16 @@ public class Athlete {
         this.strength = strength;
     }
 
-    public Integer getMass() {
-        return mass;
+    public boolean canHold(List<Athlete> athletesInTower) {
+        return strength >= totalAthletesMass(athletesInTower);
     }
 
-    public void setMass(Integer mass) {
-        this.mass = mass;
-    }
-
-    public Integer getStrength() {
-        return strength;
-    }
-
-    public void setStrength(Integer strength) {
-        this.strength = strength;
+    private int totalAthletesMass(List<Athlete> athletesInTower) {
+        return athletesInTower.stream().map(a -> a.mass).mapToInt(Integer::intValue).sum();
     }
 
     @Override
-    public String toString() {
-        return "Athlete{" +
-                "mass=" + mass +
-                ", strength=" + strength +
-                '}';
+    public int compareTo(Athlete o) {
+        return this.mass.compareTo(o.mass);
     }
 }
